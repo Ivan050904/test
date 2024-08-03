@@ -1,0 +1,24 @@
+def delit(n, a, b):
+    return n % (a + b) == 0
+
+def find(n):
+    pairs = []
+    for i in range(1, 20):
+        for j in range(i + 1, 21):
+            if delit(n, i, j):
+                pairs.append((i, j))
+    return pairs
+
+def form_password(pairs):
+    passwordd = ""
+    for pair in pairs:
+        passwordd += str(pair[0]) + str(pair[1])
+    return passwordd
+
+def sozdanie(n):
+    pairs = find(n)
+    return form_password(pairs)
+k=3
+for n in range(3, 21):
+    print(k,sozdanie(n))
+    k+=1
