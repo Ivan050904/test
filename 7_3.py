@@ -32,6 +32,7 @@ class WordsFinder:
     
 
     def count(self,word):
+        word = word.lower
         word_count = {}
         all_words = self.get_all_words
         for file_name, words in all_words().items():
