@@ -14,11 +14,10 @@ class Bank:
         for i in range(100):
             random_chislo = random.randint(50,500)
             if random_chislo + self.balance < 500:
-                self.lock.acquire
+                self.lock.release
                 self.balance += random_chislo
                 print(f'Пополнение:{random_chislo},Баланс:{self.balance}')
             elif self.balance >= 500 and self.lock.locked():
-                self.lock.release()
                 print("На балансе больше 500 рублей")
             sleep(0.001)
             
@@ -32,8 +31,8 @@ class Bank:
                 self.balance -= random_chislo
                 print(f'Снятие:{random_chislo},Баланс:{self.balance}')
             else:
+                print(f'запрос на снятие {random_chislo}, баланс {self.balance}')
                 print("Запрос отклонен, недостаточно средств")
-                self.lock.acquire()
             sleep(0.001)
             
 
