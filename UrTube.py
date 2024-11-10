@@ -43,7 +43,7 @@ class UrTube:
         for user in self.users:
             if user.nickname == nickname:
                 print(f'пользователь уже зарегестрирован')
-            return
+                return
 
         new_user = User(nickname,password,age)
         self.users.append(new_user)
@@ -53,6 +53,7 @@ class UrTube:
 
     def log_out(self):
         self.current_user = None
+        print("Вы вышли из аккаунта")
     
 
     def add(self, *videos):
@@ -77,7 +78,8 @@ class UrTube:
             print("Вы не вошли в аккаунт, пожалуйста войдите в аккаунт")
             return
 
-        current_video = None
+        current_video = next((video for video in self.videos if video.title == title), None)
+
 
         if current_video is None:
             print("Видео не найдено")
