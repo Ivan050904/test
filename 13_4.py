@@ -6,7 +6,7 @@ import aiogram.dispatcher.filters.state
 from aiogram.dispatcher.filters import Text
 import asyncio
 
-api ='8111027439:AAHKODciwKe5qNdv8vals1z4GcUnI7lIlCs'
+api ='8'
 bot = Bot(token = api)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
