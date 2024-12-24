@@ -17,13 +17,16 @@ async def create_user(username:Annotated[str,Path(min_length=5,max_length=20, de
     return "Пользователь зарегестрирован"
 
 @app.put('/user/{username}/{age}' )
-async def create_user(user_id:Annotated[int,Path(ge=1,le=100000,description="Enter id",example="1")],username:Annotated[str,Path(min_length=5,max_length=20, description='Enter your username',example="UrbanUser")],age:Annotated[int,Path(ge=18,le=120,description="Enter age",example="24")])-> str:
+async def create_user(user_id:Annotated[str,Path(ge=1,le=100000,description="Enter id",example="1")],username:Annotated[str,Path(min_length=5,max_length=20, description='Enter your username',example="UrbanUser")],age:Annotated[int,Path(ge=18,le=120,description="Enter age",example="24")])-> str:
     if user_id in users:
         users[user_id] = f"Имя: {username}, возраст: {age}"
         return f"Данные пользователя {user_id}  обновлены"
     return f"пользователь {user_id} не найден"
 
 @app.delete('/user/{user_id}')
-async def delete_user(user_id:Annotated[int,Path(ge=1,le=100000,description="Enter id",example="1")])-> str:
-    users.pop(user_id)
-    return f"Пользователь {user_id} удален."
+async def delete_user(user_id:Annotated[str,Path(ge=1,le=100000,description="Enter id",example="1")])-> str:
+    if user_id in users:
+        users.pop(user_id)
+        return f"Пользователь {user_id} удален."
+    return f"пользователь {user_id} не найден"
+    
